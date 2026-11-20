@@ -99,66 +99,71 @@ footer p{margin:0}
 <body>
 <div class="wrap">
   <header>
-    <h1>Informe CTCAE de analítica</h1>
-    <p>Pega el resultado del laboratorio, revisa los parámetros detectados y copia el informe con los grados CTCAE v5.0. Todo se procesa en tu navegador; no se envía ni se guarda nada.</p>
+    <div class="phead">
+      <h1 data-i18n="title"></h1>
+      <label for="lang" class="row"><span data-i18n="lang"></span>
+        <select id="lang"><option value="es">Español</option><option value="en">English</option></select>
+      </label>
+    </div>
+    <p data-i18n="sub"></p>
   </header>
 
   <main class="grid">
     <section class="panel" aria-labelledby="h-in">
       <div class="phead">
-        <h2 id="h-in">Analítica pegada</h2>
+        <h2 id="h-in" data-i18n="hIn"></h2>
         <div class="row">
-          <button type="button" id="btnSample">Cargar ejemplo</button>
-          <button type="button" id="btnClear">Limpiar</button>
+          <button type="button" id="btnSample" data-i18n="sample"></button>
+          <button type="button" id="btnClear" data-i18n="clear"></button>
         </div>
       </div>
-      <textarea id="input" spellcheck="false" aria-label="Texto de la analítica" placeholder="Pega aquí la analítica. Cada parámetro en una línea: nombre, valor, unidad y, si existe, rango de referencia."></textarea>
+      <textarea id="input" spellcheck="false" aria-label="Lab text" data-i18n-ph="inPh"></textarea>
       <div class="row">
-        <label for="sex">Sexo (rangos por defecto)
-          <select id="sex"><option value="M">Hombre</option><option value="F">Mujer</option></select>
+        <label for="sex"><span data-i18n="sex"></span>
+          <select id="sex"><option value="M" data-i18n="male"></option><option value="F" data-i18n="female"></option></select>
         </label>
-        <label for="date">Fecha de la analítica
+        <label for="date"><span data-i18n="date"></span>
           <input type="date" id="date">
         </label>
       </div>
-      <p class="warn">Si la línea trae rango de referencia (p. ej. «13,0 - 17,0»), se usa ese. Si no, se aplican rangos habituales que puedes corregir en la tabla.</p>
+      <p class="warn" data-i18n="warn"></p>
     </section>
 
     <section class="panel" aria-labelledby="h-out">
       <div class="phead">
-        <h2 id="h-out">Informe</h2>
-        <div class="actions"><span id="copied" role="status" aria-live="polite"></span><button type="button" id="btnCopy" class="primary">Copiar informe</button></div>
+        <h2 id="h-out" data-i18n="hOut"></h2>
+        <div class="actions"><span id="copied" role="status" aria-live="polite"></span><button type="button" id="btnCopy" class="primary" data-i18n="copy"></button></div>
       </div>
-      <textarea id="report" aria-label="Informe generado"></textarea>
+      <textarea id="report" aria-label="Report"></textarea>
       <div class="row">
-        <label for="fmt">Formato
-          <select id="fmt"><option value="list">Lista</option><option value="para">Párrafo</option></select>
+        <label for="fmt"><span data-i18n="fmt"></span>
+          <select id="fmt"><option value="list" data-i18n="list"></option><option value="para" data-i18n="para"></option></select>
         </label>
-        <label for="gs">Grado
-          <select id="gs"><option value="G">G2</option><option value="grado">grado 2</option></select>
+        <label for="gs"><span data-i18n="gs"></span>
+          <select id="gs"><option value="G">G2</option><option value="grado" data-i18n="gOpt2"></option></select>
         </label>
-        <label for="units">Recuentos
+        <label for="units"><span data-i18n="units"></span>
           <select id="units"><option value="ul">/µL</option><option value="e9">×10⁹/L</option></select>
         </label>
       </div>
       <div class="row">
-        <label for="oVals"><input type="checkbox" id="oVals" checked> Incluir valores</label>
-        <label for="oNorm"><input type="checkbox" id="oNorm"> Listar parámetros sin alteración</label>
-        <label for="oNotes"><input type="checkbox" id="oNotes" checked> Incluir notas</label>
+        <label for="oVals"><input type="checkbox" id="oVals" checked> <span data-i18n="oVals"></span></label>
+        <label for="oNorm"><input type="checkbox" id="oNorm"> <span data-i18n="oNorm"></span></label>
+        <label for="oNotes"><input type="checkbox" id="oNotes" checked> <span data-i18n="oNotes"></span></label>
       </div>
-      <p class="small">El texto es editable antes de copiar. Se regenera al cambiar cualquier dato u opción.</p>
+      <p class="small" data-i18n="editable"></p>
     </section>
   </main>
 
   <section class="panel" aria-labelledby="h-tab">
     <div class="phead">
-      <h2 id="h-tab">Parámetros detectados</h2>
+      <h2 id="h-tab" data-i18n="hTab"></h2>
       <div class="sum" id="summary"></div>
     </div>
     <div class="tablewrap">
       <table>
         <thead><tr>
-          <th>Parámetro</th><th class="r">Valor</th><th>Unidad</th><th class="r">LIN</th><th class="r">LSN</th><th>Alteración CTCAE</th><th>Grado</th><th>Nota</th>
+          <th data-i18n="thParam"></th><th class="r" data-i18n="thVal"></th><th data-i18n="thUnit"></th><th class="r" data-i18n="thLln"></th><th class="r" data-i18n="thUln"></th><th data-i18n="thAlt"></th><th data-i18n="thGrade"></th><th data-i18n="thNote"></th>
         </tr></thead>
         <tbody id="tbody"></tbody>
       </table>
@@ -167,19 +172,52 @@ footer p{margin:0}
   </section>
 
   <footer>
-    <p>LIN y LSN son los límites inferior y superior de normalidad; puedes editarlos en la tabla y el informe se recalcula.</p>
-    <p>Gradación con criterios de laboratorio de CTCAE v5.0. Los grados por múltiplos del LSN asumen un valor basal normal; con basal alterado, el criterio de CTCAE usa múltiplos del basal. Los grados que dependen de la clínica o del tratamiento (transfusión, reposición intravenosa, insulina, síntomas) se marcan con * o con «≥». Para fosfato y glucemia baja se usan los umbrales numéricos de v4.03, que v5.0 mantiene como orientación. Revisa siempre el resultado frente a la analítica original.</p>
+    <p data-i18n="f1"></p>
+    <p data-i18n="f2"></p>
+    <p data-i18n="f3"></p>
   </footer>
 </div>
 
 <script id="core">
 /*CORE_START*/
+let LANG = 'es';
+const S = (es, en) => LANG === 'en' ? en : es;
 const norm = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+const EN2ES = [
+  [/glycated|glycosylated/g,'glicosilada'], [/\bhemoglobin\b/g,'hemoglobina'], [/\bplatelets?\b/g,'plaquetas'],
+  [/white blood cells?|white cell count|\bwcc\b/g,'leucocitos'], [/neutrophils?/g,'neutrofilos'], [/lymphocytes?/g,'linfocitos'],
+  [/\bcreatinine\b/g,'creatinina'], [/alkaline phosphatase/g,'fosfatasa alcalina'], [/\bbilirubin\b/g,'bilirrubina'],
+  [/\bdirect\b/g,'directa'], [/\bindirect\b/g,'indirecta'], [/\bconjugated\b/g,'conjugada'],
+  [/\bsodium\b/g,'sodio'], [/\bpotassium\b/g,'potasio'], [/\bcorrected\b/g,'corregido'], [/\bcalcium\b/g,'calcio'],
+  [/\bionized\b|\bionised\b/g,'ionizado'], [/\balbumin\b/g,'albumina'], [/\bmagnesium\b/g,'magnesio'],
+  [/\bphosphorus\b|\bphosphate\b/g,'fosforo'], [/uric acid/g,'acido urico'], [/\bglucose\b/g,'glucosa'],
+  [/triglycerides?/g,'trigliceridos'], [/cholesterol/g,'colesterol'], [/\blipase\b/g,'lipasa'], [/\bamylase\b/g,'amilasa'],
+  [/creatine kinase|creatine phosphokinase/g,'creatincinasa'], [/\bfibrinogen\b/g,'fibrinogeno'],
+  [/partial thromboplastin time/g,'ttpa'], [/d-?dimer/g,'dimero'],
+];
+const EN_TERM = {'Anemia':'Anemia','Trombopenia':'Platelet count decreased','Leucopenia':'White blood cell decreased','Neutropenia':'Neutrophil count decreased',
+  'Linfopenia':'Lymphocyte count decreased','Linfocitosis':'Lymphocyte count increased','Creatinina elevada':'Creatinine increased','AST elevada':'AST increased',
+  'ALT elevada':'ALT increased','Fosfatasa alcalina elevada':'Alkaline phosphatase increased','GGT elevada':'GGT increased','Hiperbilirrubinemia':'Blood bilirubin increased',
+  'Hiponatremia':'Hyponatremia','Hipernatremia':'Hypernatremia','Hipopotasemia':'Hypokalemia','Hiperpotasemia':'Hyperkalemia','Hipocalcemia':'Hypocalcemia',
+  'Hipercalcemia':'Hypercalcemia','Hipoalbuminemia':'Hypoalbuminemia','Hipomagnesemia':'Hypomagnesemia','Hipermagnesemia':'Hypermagnesemia','Hipofosfatemia':'Hypophosphatemia',
+  'Hiperuricemia':'Hyperuricemia','Hipoglucemia':'Hypoglycemia','Hiperglucemia':'Hyperglycemia','Hipertrigliceridemia':'Hypertriglyceridemia','Hipercolesterolemia':'Cholesterol high',
+  'Lipasa elevada':'Lipase increased','Amilasa elevada':'Serum amylase increased','CPK elevada':'CPK increased','INR elevado':'INR increased',
+  'TTPa alargado':'Activated partial thromboplastin time prolonged','Hipofibrinogenemia':'Fibrinogen decreased'};
+const EN_SHORT = {'plaquetas':'platelets','leucocitos':'WBC','neutrófilos':'neutrophils','linfocitos':'lymphocytes','creatinina':'creatinine','FA':'ALP',
+  'bilirrubina total':'total bilirubin','Ca corregido':'corrected Ca','albúmina':'albumin','ácido úrico':'uric acid','glucosa':'glucose','triglicéridos':'triglycerides',
+  'colesterol total':'total cholesterol','lipasa':'lipase','amilasa':'amylase','TTPa':'aPTT','fibrinógeno':'fibrinogen'};
+const EN_NAME = {'Hemoglobina':'Hemoglobin','Plaquetas':'Platelets','Leucocitos':'White blood cells','Neutrófilos':'Neutrophils','Linfocitos':'Lymphocytes',
+  'Creatinina':'Creatinine','Fosfatasa alcalina':'Alkaline phosphatase','Bilirrubina total':'Total bilirubin','Sodio':'Sodium','Potasio':'Potassium',
+  'Calcio corregido':'Corrected calcium','Calcio':'Calcium','Albúmina':'Albumin','Magnesio':'Magnesium','Fósforo':'Phosphorus','Ácido úrico':'Uric acid','Glucosa':'Glucose',
+  'Triglicéridos':'Triglycerides','Colesterol total':'Total cholesterol','Lipasa':'Lipase','Amilasa':'Amylase','Fibrinógeno':'Fibrinogen'};
+const tTerm = s => LANG === 'en' ? (EN_TERM[s] || s) : s;
+const tShort = s => LANG === 'en' ? (EN_SHORT[s] || s) : s;
+const tName = s => LANG === 'en' ? (EN_NAME[s] || s) : s;
 const SUP = {'³':3,'⁹':9,'⁶':6};
 const SCI_RE = /x?\s*10\s*(?:\^|\*\*|\*|e|exp)\s*([-+]?\d+)|x?\s*10\s*([³⁹⁶])/gi;
 const NUM_RE = /([<>≤≥]?)\s*(\d+(?:[.,]\d+)*)/;
 const RANGE_RE = /(\d+(?:[.,]\d+)*)\s*(?:-|–|—|\ba\b|\bto\b)\s*(\d+(?:[.,]\d+)*)/;
-const GLOBAL_SKIP = /orina|24 ?h\b|liquido|\blcr\b|ascitic|pleural|aclaram|filtrad|egfr|cockcroft/;
+const GLOBAL_SKIP = /urine|orina|24 ?h\b|liquido|\blcr\b|ascitic|pleural|aclaram|filtrad|egfr|cockcroft/;
 
 function parseNum(str, thousands) {
   if (thousands && /^\d{1,3}(\.\d{3})+(,\d+)?$/.test(str)) return parseFloat(str.replace(/\./g, '').replace(',', '.'));
@@ -208,10 +246,10 @@ function gHigh(v, uln, cuts, grades) {
   for (let i = 0; i < cuts.length; i++) if (v <= cuts[i]) return grades[i];
   return grades[cuts.length];
 }
-const fmtNum = (x, dec) => x.toLocaleString('es-ES', { maximumFractionDigits: dec, minimumFractionDigits: 0, useGrouping: false });
+const fmtNum = (x, dec) => x.toLocaleString(LANG === 'en' ? 'en-US' : 'es-ES', { maximumFractionDigits: dec, minimumFractionDigits: 0, useGrouping: false });
 const smartDec = x => Math.abs(x) >= 100 ? 0 : Math.abs(x) >= 10 ? 1 : 2;
-const groupDots = n => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-const multTxt = (v, u) => fmtNum(v / u, 1) + ' × LSN';
+const groupDots = n => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, S('.', ','));
+const multTxt = (v, u) => fmtNum(v / u, 1) + S(' × LSN', ' × ULN');
 const mulHigh = (v, uln, ms, gr) => gHigh(v, uln, ms.map(m => m * uln), gr);
 
 function countFactor(key, v, sci, ut) {
@@ -226,7 +264,7 @@ const hasU = (u, re) => re.test(u);
 
 const SPECS = [
   { key:'hb', name:'Hemoglobina', short:'Hb', unit:'g/dL', use:'lln',
-    m:/\b(hemoglobina|hb|hgb)\b/, n:/corpuscular|glicosil|hba1c|media|cmhc|hcm|fetal|\ba2\b|libre|plasma/,
+    m:/\b(hemoglobina|hb|hgb)\b/, n:/corpuscular|glicosil|hba1c|media|cmhc|hcm|fetal|\ba2\b|libre|plasma|hemoglobina a$/,
     conv:(v,u)=> hasU(u,/g\s*\/\s*l\b/) ? [0.1,false] : hasU(u,/g\s*\/\s*dl/) ? [1,false] : (v>30?[0.1,true]:[1,false]),
     def:s=>({lln:s==='F'?12:13.5}),
     grade:(v,l)=>{const g=gLow(v,l,[10,8],[1,2,3]);return{g,term:'Anemia',clin:g>=1&&g<=2};} },
@@ -278,7 +316,7 @@ const SPECS = [
     grade:(v,l,u)=>{ if(v<l){const g=gLow(v,l,[3.0,2.5],[1,3,4]);return{g,term:'Hipopotasemia',clin:g===1};}
       return{g:gHigh(v,u,[5.5,6,7]),term:'Hiperpotasemia'}; } },
   { key:'cac', name:'Calcio corregido', short:'Ca corregido', unit:'mg/dL', use:'both',
-    m:/calcio.*corregid|\bca\b.*corregid|calcio corr\b/, n:/ionic|ionizad|libre/,
+    m:/calcio.*corregid|corregid.*calcio|\bca\b.*corregid|calcio corr\b/, n:/ionic|ionizad|libre/,
     conv:(v,u)=> hasU(u,/mmol/) ? [4.008,false] : hasU(u,/mg/) ? [1,false] : (v<4.5?[4.008,true]:[1,false]),
     def:()=>({lln:8.5,uln:10.5}), grade:null },
   { key:'ca', name:'Calcio', short:'Ca', unit:'mg/dL', use:'both',
@@ -334,10 +372,10 @@ const SPECS = [
     grade:(v,_l,u)=>({g:mulHigh(v,u,[2.5,5,10]),term:'CPK elevada',note:multTxt(v,u)}) },
   { key:'inr', name:'INR', short:'INR', unit:'', use:'none',
     m:/\binr\b|indice normalizado/, def:()=>({}),
-    grade:(v)=>({g:gHigh(v,1.2,[1.5,2.5],[1,2,3]),term:'INR elevado',note:'Sin anticoagulación'}) },
+    grade:(v)=>({g:gHigh(v,1.2,[1.5,2.5],[1,2,3]),term:'INR elevado',note:S('Sin anticoagulación','Not on anticoagulation')}) },
   { key:'aptt', name:'TTPa', short:'TTPa', unit:'s', use:'uln',
     m:/\btpta\b|\bptt\b|\baptt\b|tiempo de tromboplastina|ttpa/, def:()=>({uln:35}),
-    grade:(v,_l,u)=> v<5 ? {g:null,term:'TTPa alargado',note:'Ratio: introduce segundos'}
+    grade:(v,_l,u)=> v<5 ? {g:null,term:'TTPa alargado',note:S('Ratio: introduce segundos','Ratio: enter seconds')}
       : {g:mulHigh(v,u,[1.5,2.5],[1,2,3]),term:'TTPa alargado',note:multTxt(v,u)} },
   { key:'fib', name:'Fibrinógeno', short:'fibrinógeno', unit:'mg/dL', use:'lln',
     m:/fibrinogeno/, n:/derivado|dimero/,
@@ -359,7 +397,8 @@ function parseText(text) {
     let line = raw.replace(/\u00a0/g, ' ').trim();
     let sci = null;
     line = line.replace(SCI_RE, (m, a, b) => { sci = a !== undefined ? parseInt(a, 10) : SUP[b]; return ' '; });
-    const n = norm(line);
+    let n = norm(line);
+    for (const [re, to] of EN2ES) n = n.replace(re, to);
     const d = n.match(/\d/);
     if (!d) continue;
     if (GLOBAL_SKIP.test(n)) { unrec.push(raw.trim()); continue; }
@@ -369,7 +408,8 @@ function parseText(text) {
     const rest = n.slice(d.index);
     const vm = rest.match(NUM_RE);
     if (!vm) { unrec.push(raw.trim()); continue; }
-    let v = parseNum(vm[2], !!spec.count);
+    const pn = s => (spec.count && sci === null && /^[1-9]\d{0,2}(,\d{3})+$/.test(s)) ? parseFloat(s.replace(/,/g, '')) : parseNum(s, !!spec.count);
+    let v = pn(vm[2]);
     if (!isFinite(v)) { unrec.push(raw.trim()); continue; }
     const after = rest.slice(vm.index + vm[0].length);
     const ut = (after.match(/^[^\d<>≤≥]*/) || [''])[0];
@@ -377,10 +417,10 @@ function parseText(text) {
     if (spec.pctable && isPct) { if (!(spec.key in pcts)) pcts[spec.key] = v; continue; }
     let lo = null, hi = null;
     const rm = after.match(RANGE_RE);
-    if (rm) { lo = parseNum(rm[1], !!spec.count); hi = parseNum(rm[2], !!spec.count); if (!(lo < hi)) { lo = null; hi = null; } }
+    if (rm) { lo = pn(rm[1]); hi = pn(rm[2]); if (!(lo < hi)) { lo = null; hi = null; } }
     else {
       const cm = after.match(/([<>≤≥])\s*(\d+(?:[.,]\d+)*)/);
-      if (cm) { const x = parseNum(cm[2], !!spec.count); if (cm[1] === '<' || cm[1] === '≤') hi = x; else lo = x; }
+      if (cm) { const x = pn(cm[2]); if (cm[1] === '<' || cm[1] === '≤') hi = x; else lo = x; }
     }
     let f, assumed;
     if (spec.count) [f, assumed] = countFactor(spec.key, v, sci, ut);
@@ -415,16 +455,16 @@ function evaluate(parsed, o) {
     let v = e.v, short = spec.short, term = null, noteExtra = '';
     if (spec.key === 'ca' && E.alb) {
       v = e.v + 0.8 * (4 - E.alb.v); short = 'Ca corregido';
-      noteExtra = 'Corregido por albúmina (Ca total ' + fmtNum(e.v, 1) + ')';
-    } else if (spec.key === 'ca') noteExtra = 'Sin corregir por albúmina';
+      noteExtra = S('Corregido por albúmina (Ca total ', 'Albumin-corrected (total Ca ') + fmtNum(e.v, 1) + ')';
+    } else if (spec.key === 'ca') noteExtra = S('Sin corregir por albúmina', 'Not albumin-corrected');
     let r;
     const needL = spec.use === 'lln' || spec.use === 'both', needU = spec.use === 'uln' || spec.use === 'both';
-    if ((needL && lln == null) || (needU && uln == null)) r = { g: null, term: spec.name, note: 'Falta rango' };
+    if ((needL && lln == null) || (needU && uln == null)) r = { g: null, term: spec.name, note: S('Falta rango', 'Missing range') };
     else r = spec.grade(v, lln, uln);
     items.push({
-      key: spec.key, name: spec.name, short, unit: spec.unit, count: !!spec.count, use: spec.use,
+      key: spec.key, name: tName(spec.name), short: tShort(short), unit: spec.unit, count: !!spec.count, use: spec.use,
       v, lln, uln, lnSrc: src('lln'), unSrc: src('uln'),
-      g: r.g, term: r.term, clin: !!r.clin, open: !!r.open,
+      g: r.g, term: tTerm(r.term), clin: !!r.clin, open: !!r.open,
       note: [r.note, noteExtra].filter(Boolean).join('. '),
       assumed: e.assumed, derived: !!e.derived, ca_unc: spec.key === 'ca' && !E.alb,
     });
@@ -443,32 +483,36 @@ function fmtRef(it, x, mode) {
   return fmtNum(x, smartDec(x));
 }
 const lcFirst = t => /^[A-ZÁÉÍÓÚ][a-záéíóúñ]/.test(t) ? t[0].toLowerCase() + t.slice(1) : t;
-const fmtDate = d => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(d || ''); return m ? m[3] + '/' + m[2] + '/' + m[1] : ''; };
+const fmtDate = d => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(d || ''); if (!m) return ''; return LANG === 'en' ? parseInt(m[3], 10) + ' ' + MONTHS[parseInt(m[2], 10) - 1] + ' ' + m[1] : m[3] + '/' + m[2] + '/' + m[1]; };
 
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 function buildReport(items, parsed, o) {
   const abn = items.filter(i => i.g > 0);
-  const gtxt = i => (i.open ? (o.gs === 'G' ? '≥G1' : 'grado ≥1') : (o.gs === 'G' ? 'G' + i.g : 'grado ' + i.g)) + (i.clin || i.open ? '*' : '');
+  const gw = S('grado ', 'grade ');
+  const gtxt = i => (i.open ? (o.gs === 'G' ? '≥G1' : gw + '≥1') : (o.gs === 'G' ? 'G' + i.g : gw + i.g)) + (i.clin || i.open ? '*' : '');
   const one = i => i.term + ' ' + gtxt(i) + (o.vals ? ' (' + i.short + ' ' + fmtVal(i, o.units) + ')' : '');
-  const head = (o.date ? 'Analítica del ' + fmtDate(o.date) + '. ' : '') + 'Alteraciones según CTCAE v5.0:';
+  const dpre = o.date ? S('Analítica del ', 'Labs from ') + fmtDate(o.date) + '. ' : '';
+  const head = dpre + S('Alteraciones según CTCAE v5.0:', 'Abnormalities by CTCAE v5.0:');
   let out = '';
   if (!items.length) return '';
-  if (!abn.length) out = (o.date ? 'Analítica del ' + fmtDate(o.date) + '. ' : '') + 'Sin alteraciones de grado CTCAE en los parámetros evaluados.';
+  if (!abn.length) out = dpre + S('Sin alteraciones de grado CTCAE en los parámetros evaluados.', 'No CTCAE-graded abnormalities in the evaluated parameters.');
   else if (o.fmt === 'para') out = head + ' ' + abn.map(i => lcFirst(one(i))).join(', ') + '.';
   else out = head + '\n' + abn.map(i => '• ' + one(i)).join('\n');
   if (o.norm) {
     const ok = items.filter(i => i.g === 0).map(i => i.short);
-    if (ok.length && abn.length) out += '\nSin alteración de grado CTCAE: ' + ok.join(', ') + '.';
+    if (ok.length && abn.length) out += '\n' + S('Sin alteración de grado CTCAE: ', 'No CTCAE-graded abnormality: ') + ok.join(', ') + '.';
   }
   if (o.notes) {
     const n = [];
-    if (abn.some(i => i.clin)) n.push('* Grado según el valor analítico; puede ser superior según la clínica o el tratamiento (transfusión, reposición intravenosa, síntomas).');
-    if (abn.some(i => i.open)) n.push('≥G1: en CTCAE v5.0 la hiperglucemia se gradúa por el manejo clínico.');
-    if (items.some(i => i.ca_unc)) n.push('Calcio sin corregir por albúmina.');
+    if (abn.some(i => i.clin)) n.push(S('* Grado según el valor analítico; puede ser superior según la clínica o el tratamiento (transfusión, reposición intravenosa, síntomas).',
+      '* Grade based on the lab value; may be higher depending on clinical status or treatment (transfusion, intravenous replacement, symptoms).'));
+    if (abn.some(i => i.open)) n.push(S('≥G1: en CTCAE v5.0 la hiperglucemia se gradúa por el manejo clínico.', '≥G1: in CTCAE v5.0 hyperglycemia is graded by clinical management.'));
+    if (items.some(i => i.ca_unc)) n.push(S('Calcio sin corregir por albúmina.', 'Calcium not corrected for albumin.'));
     const ass = items.filter(i => i.assumed).map(i => i.short);
-    if (ass.length) n.push('Unidades asumidas por magnitud del valor: ' + ass.join(', ') + '.');
+    if (ass.length) n.push(S('Unidades asumidas por magnitud del valor: ', 'Units assumed from the magnitude of the value: ') + ass.join(', ') + '.');
     const ng = items.filter(i => i.g === null).map(i => i.short);
-    if (ng.length) n.push('No gradable por falta de dato: ' + ng.join(', ') + '.');
-    if (abn.some(i => /LSN/.test(i.note || ''))) n.push('Gradación por múltiplos del LSN, asumiendo valor basal normal.');
+    if (ng.length) n.push(S('No gradable por falta de dato: ', 'Not gradable due to missing data: ') + ng.join(', ') + '.');
+    if (abn.some(i => /LSN|ULN/.test(i.note || ''))) n.push(S('Gradación por múltiplos del LSN, asumiendo valor basal normal.', 'Graded by multiples of the ULN, assuming a normal baseline.'));
     if (n.length) out += '\n' + n.join('\n');
   }
   return out;
@@ -479,7 +523,7 @@ function buildReport(items, parsed, o) {
 <script id="ui">
 const $ = id => document.getElementById(id);
 const state = { ov: {} };
-const SAMPLE = [
+const SAMPLE_ES = [
 'Hemoglobina\t8,4\tg/dL\t13,0 - 17,0',
 'Leucocitos\t2,1\t10^3/µL\t4,0 - 11,0',
 'Neutrófilos (abs)\t0,9\t10^3/µL\t1,8 - 7,0',
@@ -500,13 +544,77 @@ const SAMPLE = [
 'LDH\t320\tU/L\t135 - 225',
 'PCR\t4,2\tmg/dL'
 ].join('\n');
+const SAMPLE_EN = [
+'Hemoglobin\t8.4\tg/dL\t13.0 - 17.0',
+'White blood cells\t2.1\t10^3/µL\t4.0 - 11.0',
+'Neutrophils (abs)\t0.9\t10^3/µL\t1.8 - 7.0',
+'Lymphocytes (abs)\t0.4\t10^3/µL\t1.0 - 4.0',
+'Platelets\t38\t10^3/µL\t150 - 400',
+'Creatinine\t1.9\tmg/dL\t0.7 - 1.2',
+'AST\t112\tU/L\t< 40',
+'ALT\t65\tU/L\t< 41',
+'GGT\t210\tU/L\t< 60',
+'Alkaline phosphatase\t140\tU/L\t40 - 130',
+'Total bilirubin\t2.1\tmg/dL\t0.2 - 1.2',
+'Sodium\t131\tmmol/L\t135 - 145',
+'Potassium\t3.3\tmmol/L\t3.5 - 5.1',
+'Calcium\t8.0\tmg/dL\t8.6 - 10.2',
+'Albumin\t3.1\tg/dL\t3.5 - 5.2',
+'Magnesium\t1.1\tmg/dL\t1.6 - 2.6',
+'Glucose\t112\tmg/dL\t70 - 100',
+'LDH\t320\tU/L\t135 - 225',
+'CRP\t4.2\tmg/dL'
+].join('\n');
+const sample = () => LANG === 'en' ? SAMPLE_EN : SAMPLE_ES;
+
+const I18N = {
+  es: {
+    docTitle:'Informe CTCAE de analítica', title:'Informe CTCAE de analítica', lang:'Idioma',
+    sub:'Pega el resultado del laboratorio, revisa los parámetros detectados y copia el informe con los grados CTCAE v5.0.',
+    hIn:'Analítica pegada', sample:'Cargar ejemplo', clear:'Limpiar',
+    inPh:'Pega aquí la analítica. Cada parámetro en una línea: nombre, valor, unidad y, si existe, rango de referencia.',
+    sex:'Sexo (rangos por defecto)', male:'Hombre', female:'Mujer', date:'Fecha de la analítica',
+    warn:'Si la línea trae rango de referencia (p. ej. «13,0 - 17,0»), se usa ese. Si no, se aplican rangos habituales que puedes corregir en la tabla.',
+    hOut:'Informe', copy:'Copiar informe', fmt:'Formato', list:'Lista', para:'Párrafo', gs:'Grado', gOpt2:'grado 2', units:'Recuentos',
+    oVals:'Incluir valores', oNorm:'Listar parámetros sin alteración', oNotes:'Incluir notas',
+    editable:'El texto es editable antes de copiar. Se regenera al cambiar cualquier dato u opción.',
+    hTab:'Parámetros detectados', thParam:'Parámetro', thVal:'Valor', thUnit:'Unidad', thLln:'LIN', thUln:'LSN', thAlt:'Alteración CTCAE', thGrade:'Grado', thNote:'Nota',
+    f1:'LIN y LSN son los límites inferior y superior de normalidad; puedes editarlos en la tabla y el informe se recalcula.',
+    f2:'Gradación con criterios de laboratorio de CTCAE v5.0. Los grados por múltiplos del LSN asumen un valor basal normal; con basal alterado, el criterio de CTCAE usa múltiplos del basal. Los grados que dependen de la clínica o del tratamiento (transfusión, reposición intravenosa, insulina, síntomas) se marcan con * o con «≥». Para fosfato y glucemia baja se usan los umbrales numéricos de v4.03, que v5.0 mantiene como orientación. Revisa siempre el resultado frente a la analítica original.',
+    f3:'Todo se procesa en tu navegador; no se envía ni se guarda nada.'
+  },
+  en: {
+    docTitle:'CTCAE lab report', title:'CTCAE lab report', lang:'Language',
+    sub:'Paste the laboratory results, check the detected parameters and copy the report with CTCAE v5.0 grades.',
+    hIn:'Pasted lab results', sample:'Load example', clear:'Clear',
+    inPh:'Paste the lab results here. One parameter per line: name, value, unit and, if available, reference range.',
+    sex:'Sex (default ranges)', male:'Male', female:'Female', date:'Lab date',
+    warn:'If the line includes a reference range (e.g. "13.0 - 17.0"), it is used. Otherwise, typical ranges are applied and you can edit them in the table.',
+    hOut:'Report', copy:'Copy report', fmt:'Format', list:'List', para:'Paragraph', gs:'Grade', gOpt2:'grade 2', units:'Counts',
+    oVals:'Include values', oNorm:'List parameters without abnormality', oNotes:'Include notes',
+    editable:'The text is editable before copying. It is regenerated whenever any data or option changes.',
+    hTab:'Detected parameters', thParam:'Parameter', thVal:'Value', thUnit:'Unit', thLln:'LLN', thUln:'ULN', thAlt:'CTCAE term', thGrade:'Grade', thNote:'Note',
+    f1:'LLN and ULN are the lower and upper limits of normal; you can edit them in the table and the report is recalculated.',
+    f2:'Grading uses the CTCAE v5.0 laboratory criteria. Grades based on multiples of the ULN assume a normal baseline; with an abnormal baseline, CTCAE uses multiples of baseline. Grades that depend on clinical status or treatment (transfusion, intravenous replacement, insulin, symptoms) are marked with * or "≥". For phosphate and low glucose the v4.03 numeric thresholds are used, which v5.0 keeps as guidance. Always check the result against the original lab report.',
+    f3:'Everything is processed in your browser; nothing is sent or stored.'
+  }
+};
+function applyLang() {
+  const T = I18N[LANG];
+  document.documentElement.lang = LANG;
+  document.title = T.docTitle;
+  document.querySelectorAll('[data-i18n]').forEach(e => { e.textContent = T[e.dataset.i18n]; });
+  document.querySelectorAll('[data-i18n-ph]').forEach(e => { e.placeholder = T[e.dataset.i18nPh]; });
+  $('input').setAttribute('aria-label', LANG === 'en' ? 'Lab text' : 'Texto de la analítica');
+  $('report').setAttribute('aria-label', LANG === 'en' ? 'Generated report' : 'Informe generado');
+}
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const opts = () => ({ date: $('date').value, fmt: $('fmt').value, gs: $('gs').value, units: $('units').value,
   vals: $('oVals').checked, norm: $('oNorm').checked, notes: $('oNotes').checked });
 
 function chip(i) {
-  if (i.g === null) return '<span class="chip cn">n/d</span>';
+  if (i.g === null) return '<span class="chip cn">' + S('n/d', 'n/a') + '</span>';
   const t = i.open ? '≥1' : (i.g === 0 ? '0' : String(i.g));
   return '<span class="chip c' + i.g + '">' + t + (i.clin || i.open ? '*' : '') + '</span>';
 }
@@ -514,24 +622,31 @@ function refCell(i, b, mode) {
   const used = i.use === 'both' || i.use === b;
   if (!used) return '<span class="dash">—</span>';
   const val = b === 'lln' ? i.lln : i.uln, src = b === 'lln' ? i.lnSrc : i.unSrc;
+  const srcTxt = src === 'editado' ? S('editado', 'edited') : src === 'línea' ? S('línea', 'line') : S('defecto', 'default');
+  const bound = b === 'lln' ? S(' límite inferior', ' lower limit') : S(' límite superior', ' upper limit');
   return '<input class="num' + (src === 'editado' ? ' edited' : '') + '" inputmode="decimal" data-k="' + i.key + '" data-b="' + b +
-    '" value="' + esc(fmtRef(i, val, mode)) + '" aria-label="' + esc(i.name) + (b === 'lln' ? ' límite inferior' : ' límite superior') + '" title="Origen: ' + src + '">';
+    '" value="' + esc(fmtRef(i, val, mode)) + '" aria-label="' + esc(i.name) + bound + '" title="' + S('Origen: ', 'Source: ') + srcTxt + '">';
 }
 function renderTable(items, parsed) {
   const mode = $('units').value;
-  $('tbody').innerHTML = items.map(i => '<tr><td>' + esc(i.name) + (i.derived ? ' <span class="small">(calculado)</span>' : '') + '</td>' +
+  $('tbody').innerHTML = items.map(i => '<tr><td>' + esc(i.name) + (i.derived ? ' <span class="small">' + S('(calculado)', '(calculated)') + '</span>' : '') + '</td>' +
     '<td class="r">' + esc(i.count ? (mode === 'e9' ? fmtNum(i.v / 1000, 2) : groupDots(i.v)) : fmtNum(i.v, smartDec(i.v))) + '</td>' +
-    '<td>' + esc(i.count ? (mode === 'e9' ? '×10⁹/L' : '/µL') : i.unit) + (i.assumed ? ' <span class="small" title="Unidad asumida por la magnitud del valor">(asumida)</span>' : '') + '</td>' +
+    '<td>' + esc(i.count ? (mode === 'e9' ? '×10⁹/L' : '/µL') : i.unit) + (i.assumed ? ' <span class="small" title="' + S('Unidad asumida por la magnitud del valor', 'Unit assumed from the magnitude of the value') + '">' + S('(asumida)', '(assumed)') + '</span>' : '') + '</td>' +
     '<td class="r">' + refCell(i, 'lln', mode) + '</td><td class="r">' + refCell(i, 'uln', mode) + '</td>' +
-    '<td>' + (i.g > 0 ? esc(i.term) : '<span class="dash">' + (i.g === 0 ? 'Sin alteración' : esc(i.term)) + '</span>') + '</td>' +
+    '<td>' + (i.g > 0 ? esc(i.term) : '<span class="dash">' + (i.g === 0 ? S('Sin alteración', 'Within limits') : esc(i.term)) + '</span>') + '</td>' +
     '<td>' + chip(i) + '</td><td class="small">' + esc(i.note || '') + '</td></tr>').join('') ||
-    '<tr><td colspan="8" class="small">Pega una analítica para ver los parámetros detectados.</td></tr>';
+    '<tr><td colspan="8" class="small">' + S('Pega una analítica para ver los parámetros detectados.', 'Paste lab results to see the detected parameters.') + '</td></tr>';
   const abn = items.filter(i => i.g > 0);
-  $('summary').innerHTML = items.length ? '<span class="small">' + items.length + ' parámetros, ' + abn.length + ' alterados</span>' +
+  $('summary').innerHTML = items.length ? '<span class="small">' + items.length + S(' parámetros, ', ' parameters, ') + abn.length + S(' alterados', ' abnormal') + '</span>' +
     [1,2,3,4].map(g => { const c = abn.filter(i => i.g === g && !i.open).length; return c ? '<span class="chip c' + g + '">G' + g + ' × ' + c + '</span>' : ''; }).join('') : '';
   const u = parsed.unrec;
   $('unrecBox').hidden = !u.length;
-  if (u.length) { $('unrecSum').textContent = u.length + (u.length === 1 ? ' línea sin criterio CTCAE de laboratorio o no reconocida' : ' líneas sin criterio CTCAE de laboratorio o no reconocidas'); $('unrec').textContent = u.join('\n'); }
+  if (u.length) {
+    $('unrecSum').textContent = LANG === 'en'
+      ? u.length + (u.length === 1 ? ' line without a CTCAE laboratory criterion or not recognized' : ' lines without a CTCAE laboratory criterion or not recognized')
+      : u.length + (u.length === 1 ? ' línea sin criterio CTCAE de laboratorio o no reconocida' : ' líneas sin criterio CTCAE de laboratorio o no reconocidas');
+    $('unrec').textContent = u.join('\n');
+  }
 }
 function update() {
   const parsed = parseText($('input').value);
@@ -545,11 +660,17 @@ async function copyReport() {
   try { await navigator.clipboard.writeText(t); ok = true; } catch (e) {
     try { $('report').select(); ok = document.execCommand('copy'); } catch (e2) { ok = false; }
   }
-  el.textContent = ok ? 'Informe copiado' : 'No se pudo copiar: selecciona el texto y copia con Ctrl+C';
+  el.textContent = ok ? S('Informe copiado', 'Report copied') : S('No se pudo copiar: selecciona el texto y copia con Ctrl+C', 'Could not copy: select the text and press Ctrl+C');
   setTimeout(() => { el.textContent = ''; }, 3000);
 }
 $('input').addEventListener('input', () => { state.ov = {}; update(); });
 ['sex','date','fmt','gs','units','oVals','oNorm','oNotes'].forEach(id => $(id).addEventListener('change', update));
+$('lang').addEventListener('change', () => {
+  const cur = $('input').value, wasSample = cur === SAMPLE_ES || cur === SAMPLE_EN;
+  LANG = $('lang').value;
+  if (wasSample) $('input').value = sample();
+  applyLang(); update();
+});
 $('tbody').addEventListener('change', ev => {
   const t = ev.target; if (!t.matches('input.num')) return;
   const k = t.dataset.k, b = t.dataset.b, txt = t.value.trim();
@@ -562,10 +683,13 @@ $('tbody').addEventListener('change', ev => {
   }
   update();
 });
-$('btnSample').addEventListener('click', () => { $('input').value = SAMPLE; state.ov = {}; update(); });
+$('btnSample').addEventListener('click', () => { $('input').value = sample(); state.ov = {}; update(); });
 $('btnClear').addEventListener('click', () => { $('input').value = ''; state.ov = {}; update(); $('input').focus(); });
 $('btnCopy').addEventListener('click', copyReport);
-$('input').value = SAMPLE;
+LANG = /^en/i.test(navigator.language || '') ? 'en' : 'es';
+$('lang').value = LANG;
+$('input').value = sample();
+applyLang();
 update();
 </script>
 </body>
